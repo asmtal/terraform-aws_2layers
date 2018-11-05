@@ -1,0 +1,1 @@
+git add . && git commit -m "$(date) -- $(git status | grep "new file:" | awk '{print $3}') -- added or changed" && git push origin master
