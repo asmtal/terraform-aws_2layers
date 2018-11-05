@@ -9,3 +9,5 @@ variable "environment" {
 variable "user" {
   default                               = "ec2-user"
 }
+
+variable "bastion_vpc_id" {}

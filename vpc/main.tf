@@ -11,12 +11,10 @@ module "vpc" {
   source				= "terraform-aws-modules/vpc/aws"
   name					= "${var.name_prefix}-vpc"
   cidr					= "10.200.0.0/16"
-
   azs					= ["us-east-1a", "us-east-1b", "us-east-1c"]
   private_subnets			= ["10.200.1.0/24", "10.200.2.0/24", "10.200.3.0/24"]
   public_subnets			= ["10.200.11.0/24", "10.200.12.0/24", "10.200.13.0/24"]
   create_database_subnet_group		= false
-
   enable_nat_gateway			= true
   single_nat_gateway			= true
   reuse_nat_ips				= true

@@ -22,13 +22,9 @@ data "terraform_remote_state" "alb" {
         }
 }
 
-//data "aws_alb" "front-dns_name" {
- // dns_name = "${data.terraform_remote_state.alb.front-dns_name}"
-//}
-
 resource "aws_route53_record" "core" {
-  zone_id = "Z3P2BXUX8FSG24"
-  name    = "teste-auto-front"
+  zone_id = "${var.zone_id}"
+  name    = "${var.name_prefix}"
   type    = "CNAME"
   ttl     = "300"
   //records = ["${data.aws_alb.front-dns_name.dns_name}"]
