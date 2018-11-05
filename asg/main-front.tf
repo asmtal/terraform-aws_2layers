@@ -3,14 +3,14 @@
 module "front-asg" {
   source = "terraform-aws-modules/autoscaling/aws"
 
-  name = "terraform-project-front-asg"
+  name = "${var.name-prefix}-front-asg"
 
   lc_name = "terraform-project-front-lc"
 
   target_group_arns            = ["${data.aws_alb_target_group.front-alb_target.arn}"]
-  key_name		       = "rede-infra-cloud-key"
-  image_id                     = "ami-09597ae8a285f8e88"
-  instance_type                = "t2.micro"
+  image_id                     = "${var.image_id["front"]}"
+  instance_type                = "${var.instance_type["front"]}"
+  key_name                     = "${var.key_name}"
   security_groups              = ["${data.aws_security_group.vpc_sg.id}","${data.aws_security_group.front_sg.id}","${data.terraform_remote_state.sg.alb_front_security_group_id}"]
   associate_public_ip_address  = true
   recreate_asg_when_lc_changes = false
@@ -63,7 +63,7 @@ module "front-asg" {
   ]
 
   # Auto scaling group
-  asg_name                  = "terraform-project-asg"
+  asg_name                  = "${var.name_prefix}-asg"
   vpc_zone_identifier       = ["${data.aws_subnet_ids.all.ids}"]
   health_check_type         = "EC2"
   min_size                  = 2
@@ -74,12 +74,12 @@ module "front-asg" {
   tags = [
     {
       key                 = "Environment"
-      value               = "dev"
+      value               = "${var.environment}"
       propagate_at_launch = true
     },
     {
       key                 = "Project"
-      value               = "megasecret"
+      value               = "${var.name_prefix}"
       propagate_at_launch = true
     },
   ]

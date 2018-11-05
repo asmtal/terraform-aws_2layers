@@ -9,3 +9,21 @@ variable "environment" {
 variable "user" {
   default                       = "ec2-user"
 }
+
+variable "image_id" {
+  default = {
+	"back"			= ""
+	"front"			= ""
+  }
+}
+
+variable "instance_type" {
+  default = {
+	"back"			= ""
+	"front"			= ""
+  }
+}
+
+variable "key_name" {
+  default			= ""
+}

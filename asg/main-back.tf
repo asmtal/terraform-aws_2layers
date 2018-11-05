@@ -3,14 +3,14 @@
 module "back-asg" {
   source = "terraform-aws-modules/autoscaling/aws"
 
-  name = "terraform-project-back-asg"
+  name = "${var.name_prefix}-back-asg"
 
-  lc_name = "terraform-project-back-lc"
+  lc_name = "${var.name_prefix}-back-lc"
 
   target_group_arns            = ["${data.aws_alb_target_group.back-alb_target.arn}"]
-  image_id                     = "ami-0ed9d4d95e8f527d6"
-  instance_type                = "t2.micro"
-  key_name                     = "rede-infra-cloud-key"
+  image_id                     = "${var.image_id["back"]}"
+  instance_type                = "${var.instance_type["back"]}"
+  key_name                     = "${var.key_name}"
   security_groups              = ["${data.aws_security_group.vpc_sg.id}","${data.aws_security_group.back_sg.id}"]
   associate_public_ip_address  = true
   recreate_asg_when_lc_changes = false
@@ -63,7 +63,7 @@ module "back-asg" {
   ]
 
   # Auto scaling group
-  asg_name                  = "terraform-project-asg"
+  asg_name                  = "${var.name_prefix}-asg"
   vpc_zone_identifier       = ["${data.aws_subnet_ids.all.ids}"]
   health_check_type         = "EC2"
   min_size                  = 2
@@ -74,12 +74,12 @@ module "back-asg" {
   tags = [
     {
       key                 = "Environment"
-      value               = "dev"
+      value               = "${var.environment}"
       propagate_at_launch = true
     },
     {
       key                 = "Project"
-      value               = "megasecret"
+      value               = "${var.name_prefix}"
       propagate_at_launch = true
     },
   ]
