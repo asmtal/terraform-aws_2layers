@@ -3,7 +3,7 @@
 module "front-asg" {
   source = "terraform-aws-modules/autoscaling/aws"
 
-  name = "${var.name-prefix}-front-asg"
+  name = "${var.name_prefix}-front-asg"
 
   lc_name = "terraform-project-front-lc"
 
