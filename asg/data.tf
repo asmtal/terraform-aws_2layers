@@ -21,7 +21,7 @@ data "terraform_remote_state" "alb" {
 data "terraform_remote_state" "sg" {
         backend                 = "local"
         config {
-                path            = "../sg/terraform.tfstate"
+                path            = "../firewall/terraform.tfstate"
         }
 }
 

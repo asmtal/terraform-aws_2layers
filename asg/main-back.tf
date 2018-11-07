@@ -14,48 +14,48 @@ module "back-asg" {
 
   ebs_block_device = [
     {
-      device_name           = "/dev/sdj"
-      volume_type           = "gp2"
-      volume_size           = "1"
-      delete_on_termination = true
+      device_name		= "/dev/sdj"
+      volume_type		= "gp2"
+      volume_size		= "1"
+      delete_on_termination	= true
     },
     {
-      device_name           = "/dev/sdg"
-      volume_type           = "gp2"
-      volume_size           = "6"
-      delete_on_termination = true
+      device_name		= "/dev/sdg"
+      volume_type		= "gp2"
+      volume_size		= "6"
+      delete_on_termination	= true
     },
     {
-      device_name           = "/dev/sdk"
-      volume_type           = "gp2"
-      volume_size           = "8"
-      delete_on_termination = true
+      device_name		= "/dev/sdk"
+      volume_type		= "gp2"
+      volume_size		= "8"
+      delete_on_termination	= true
     },
     {
-      device_name           = "/dev/sdi"
-      volume_type           = "gp2"
-      volume_size           = "1"
-      delete_on_termination = true
+      device_name		= "/dev/sdi"
+      volume_type		= "gp2"
+      volume_size		= "1"
+      delete_on_termination	= true
     },
     {
-      device_name           = "/dev/sdf"
-      volume_type           = "gp2"
-      volume_size           = "6"
-      delete_on_termination = true
+      device_name		= "/dev/sdf"
+      volume_type		= "gp2"
+      volume_size		= "6"
+      delete_on_termination	= true
     },
     {
-      device_name           = "/dev/sdh"
-      volume_type           = "gp2"
-      volume_size           = "1"
-      delete_on_termination = true
+      device_name		= "/dev/sdh"
+      volume_type		= "gp2"
+      volume_size		= "1"
+      delete_on_termination	= true
     },
   ]
 
   root_block_device = [
     {
-      volume_size           = "160"
-      volume_type           = "gp2"
-      delete_on_termination = true
+      volume_size		= "160"
+      volume_type		= "gp2"
+      delete_on_termination	= true
     },
   ]
 
