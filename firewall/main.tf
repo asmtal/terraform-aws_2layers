@@ -8,33 +8,23 @@ provider "aws" {
 }
 
 terraform {
-        backend "local" {
-                path            = "terraform.tfstate"
-        }
+  backend "local" {
+    path				= "terraform.tfstate"
+  }
 }
 
 data "terraform_remote_state" "vpc" {
-        backend                 = "local"
-        config {
-                path            = "../vpc/terraform.tfstate"
-        }
+  backend				= "local"
+  config {
+    path				= "../vpc/terraform.tfstate"
+  }
 }
 
 data "aws_subnet_ids" "vpc" {
-  vpc_id                        = "${data.terraform_remote_state.vpc.vpc_id}"
+  vpc_id				= "${data.terraform_remote_state.vpc.vpc_id}"
 }
 
-/*
- --------------------
-|####################|
-|# Security groups ##|
-|####################|
- --------------------
-*/
-
-################
-# VPC default ##
-################
+## VPC Default
 resource "aws_security_group" "vpc_rule" {
   description	= "VPC Rule"
   name		= "${var.name_prefix}-vpc-default_rule"
@@ -53,9 +43,7 @@ resource "aws_security_group" "vpc_rule" {
   }
 }
 
-###############
-# BACK rules ##
-###############
+## BACK rules
 resource "aws_security_group" "back_rule" {
   description   = "VPC Rule"
   name          = "${var.name_prefix}-back_rule"
@@ -80,9 +68,7 @@ resource "aws_security_group" "back_rule" {
   }
 }
 
-################
-# FRONT rules ##
-################
+## FRONT rules
 resource "aws_security_group" "front_rule" {
   description   = "VPC Rule"
   name          = "${var.name_prefix}-front_rule"
@@ -107,6 +93,7 @@ resource "aws_security_group" "front_rule" {
   }
 }
 
+## 
 resource "aws_security_group" "alb_front_rule" {
   description   = "VPC Rule"
   name          = "${var.name_prefix}-alb_front_rule"
@@ -124,4 +111,3 @@ resource "aws_security_group" "alb_front_rule" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
-

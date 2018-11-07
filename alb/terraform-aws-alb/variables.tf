@@ -87,17 +87,7 @@ variable "load_balancer_update_timeout" {
 
 variable "logging_enabled" {
   description = "Controls if the ALB will log requests to S3."
-  default     = true
-}
-
-variable "log_bucket_name" {
-  description = "S3 bucket (externally created) for storing load balancer access logs. Required if logging_enabled is true."
-  default     = ""
-}
-
-variable "log_location_prefix" {
-  description = "S3 prefix within the log_bucket_name under which logs are stored."
-  default     = ""
+  default     = false
 }
 
 variable "subnets" {

@@ -6,10 +6,6 @@ variable "environment" {
   default			= "DEV"
 }
 
-variable "user" {
-  default			= "ec2-user"
-}
-
 variable "vpc_cidr_block" {
   default			= "10.200.0.0/16"
 }

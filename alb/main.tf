@@ -10,7 +10,7 @@ provider "aws" {
 module "back-alb" {
   source                        = "terraform-aws-modules/alb/aws"
   load_balancer_name            = "${var.name_prefix}-back-alb"
-  security_groups               = ["${data.aws_security_group.vpc_sg.id}","${data.aws_security_group.back_sg.id}"]
+  security_groups               = ["${data.aws_security_group.vpc_firewall.id}","${data.aws_security_group.back_firewall.id}"]
   load_balancer_is_internal	= true
   logging_enabled		= false
   subnets                       = ["${data.aws_subnet.private0.id}","${data.aws_subnet.private1.id}","${data.aws_subnet.private2.id}"]
@@ -34,7 +34,7 @@ module "back-alb" {
 module "front-alb" {
   source                        = "terraform-aws-modules/alb/aws"
   load_balancer_name            = "${var.name_prefix}-front-alb"
-  security_groups               = ["${data.aws_security_group.vpc_sg.id}","${data.aws_security_group.front_sg.id}"]
+  security_groups               = ["${data.aws_security_group.vpc_firewall.id}","${data.aws_security_group.front_firewall.id}"]
   load_balancer_is_internal     = false
   logging_enabled               = false
   subnets                       = ["${data.aws_subnet.public0.id}","${data.aws_subnet.public1.id}","${data.aws_subnet.public2.id}"]

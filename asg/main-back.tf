@@ -1,19 +1,16 @@
 # Launch configuration and autoscaling group
 ######
 module "back-asg" {
-  source = "terraform-aws-modules/autoscaling/aws"
-
-  name = "${var.name_prefix}-back-asg"
-
-  lc_name = "${var.name_prefix}-back-lc"
-
-  target_group_arns            = ["${data.aws_alb_target_group.back-alb_target.arn}"]
-  image_id                     = "${var.image_id["back"]}"
-  instance_type                = "${var.instance_type["back"]}"
-  key_name                     = "${var.key_name}"
-  security_groups              = ["${data.aws_security_group.vpc_sg.id}","${data.aws_security_group.back_sg.id}"]
-  associate_public_ip_address  = true
-  recreate_asg_when_lc_changes = false
+  source			= "terraform-aws-modules/autoscaling/aws"
+  name				= "${var.name_prefix}-back-asg"
+  lc_name			= "${var.name_prefix}-back-lc"
+  target_group_arns		= ["${data.aws_alb_target_group.back-alb_target.arn}"]
+  image_id			= "${var.image_id["back"]}"
+  instance_type			= "${var.instance_type["back"]}"
+  key_name			= "${var.key_name}"
+  security_groups		= ["${data.aws_security_group.vpc_sg.id}","${data.aws_security_group.back_sg.id}"]
+  associate_public_ip_address	= true
+  recreate_asg_when_lc_changes	= false
 
   ebs_block_device = [
     {

@@ -11,10 +11,10 @@ data "terraform_remote_state" "vpc" {
         }
 }
 
-data "terraform_remote_state" "sg" {
+data "terraform_remote_state" "firewall" {
         backend                 = "local"
         config {
-                path            = "../sg/terraform.tfstate"
+                path            = "../firewall/terraform.tfstate"
         }
 }
 
@@ -22,12 +22,12 @@ data "aws_subnet_ids" "all" {
   vpc_id = "${data.terraform_remote_state.vpc.vpc_id}"
 }
 
-data "aws_security_group" "vpc_sg" {
-  id = "${data.terraform_remote_state.sg.vpc_security_group_id}"
+data "aws_security_group" "vpc_firewall" {
+  id = "${data.terraform_remote_state.firewall.vpc_security_group_id}"
 }
 
-data "aws_security_group" "back_sg" {
-  id = "${data.terraform_remote_state.sg.back_security_group_id}"
+data "aws_security_group" "back_firewall" {
+  id = "${data.terraform_remote_state.firewall.back_security_group_id}"
 }
 
 data "aws_subnet" "private0" {
@@ -42,8 +42,8 @@ data "aws_subnet" "private2" {
   id = "${data.terraform_remote_state.vpc.private_subnets[2]}"
 }
 
-data "aws_security_group" "front_sg" {
-  id = "${data.terraform_remote_state.sg.front_security_group_id}"
+data "aws_security_group" "front_firewall" {
+  id = "${data.terraform_remote_state.firewall.front_security_group_id}"
 }
 
 data "aws_subnet" "public0" {
